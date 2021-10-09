@@ -1,0 +1,72 @@
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+    .checkBox{
+    
+    margin-right: 4.75rem;
+    display: -webkit-inline-box;
+    padding: 0px;
+}
+.radioClass{
+    
+    margin-right: 4.75rem;
+    display: -webkit-inline-box;
+    padding: 0px;
+}
+</style>
+
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <form [formGroup]="allTechForm" (ngSubmit)="onSubmit()">
+          <div *ngFor="let i of formData.dataArray">
+            <div *ngIf="i.head=='input'" class="form-group">
+              <!-- <div *ngIf="i.type =='checkBox'" [className]="getClass(i)"  >
+                <label class="mr-4">{{i.name}}</label>
+
+                <div *ngFor="let control of checkBoxesArray.controls; let k =index;" class="checkBox">
+                  <input  id="checkId{{k}}"type={{i.type}} class="form-control"  (change)="checkItem($event)"
+               
+                  />
+                  <label  for="checkId{{k}}">{{control}}</label>
+                </div>
+
+              </div> -->
+              <!-- <div *ngIf="i.type =='radio'" [className]="getClass(i)"  >
+                <label class="mr-4">{{i.name}}</label>
+                <div *ngFor="let r of i.radios" class="radioClass"  >
+                  <input  id={{i.controlName}}  style="margin-top: 8px;" type={{i.type}} class="form-control"
+                  [formControlName]="i.controlName" name={{i.controlName}} value={{r}}/>
+                  <label class="mr-4" for={{i.controlName}}>{{r}}</label>
+                </div>
+
+              </div> -->
+              <div *ngIf="i.type!='checkBox' && i.type !='radio'" [className]="getClass(i)">
+                <label>{{i.name}}</label>
+
+                <input type={{i.type}} class="form-control" [formControlName]="i.controlName"
+                  placeholder={{i.placeholder}} />
+
+              </div>
+
+            </div>
+            <div *ngIf="i.head=='select'" class="form-group" [className]="getClass(i)">
+              <label for="exampleFormControlSelect1">{{i.name}}</label>
+              <select class="form-control" id="exampleFormControlSelect1" [formControlName]="i.controlName">
+                <option disabled selected>Select</option>
+                <option *ngFor="let o of i.options">{{o}}</option>
+
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <button class="btn btn-primary">{{formData.buttonName}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</html>
